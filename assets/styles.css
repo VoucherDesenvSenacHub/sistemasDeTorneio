@@ -1,0 +1,182 @@
+
+body {
+  width: 100%;
+  background: #343E59;
+  color: #777;
+  font-family: Montserrat, Arial, sans-serif;
+}
+nav{
+  width: 100%;
+} 
+.body-bg {
+  background: #F3F4FA ;
+}
+
+h1, h2, h3, h4, h5, h6, strong {
+  font-weight: 600;
+}
+
+body{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content-area {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.box {
+  background-color: #2B2D3E;
+  padding: 25px 20px;
+}
+
+.shadow {
+  box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+}
+ /* .box {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-shadow: 0 1px 1px 1px #666;
+  box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+  position: relative;
+  border-radius: 5px;
+} */
+
+ .box .details {
+  position: absolute;
+  color: #fff;
+  transform: scale(0.7) translate(-22px, 20px);
+}
+.sparkboxes strong {
+  position: relative;
+  z-index: 3;
+  top: -8px;
+  color: #fff;
+}
+
+.sparkr{
+  width: 100px;
+  height: 200px;
+}
+.containerPontos, .containerNameTime{
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.containerTimes{
+  width: 85%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ajuste automático de colunas */
+  grid-gap: 20px; 
+  padding: 10px;
+  border: 1px solid red; 
+}
+.container1{
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.detalhes{
+  width: 100%;
+  height: 100%;
+  text-shadow: 0 1px 1px 1px #666;
+  box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+
+  border-radius: 5px;
+}
+.boxStyle{
+  width: 90%;
+  border-radius: 5px;
+  padding-left: 10px;
+
+  background-color: #18181b;
+
+}
+
+/* Box 1 */
+.box1 {
+  background-image: linear-gradient(135deg, #ABDCFF 10%, #0396FF 100%);
+}
+
+/* Box 2 */
+.box2 {
+  background-image: linear-gradient(135deg, #2AFADF 10%, #4C83FF 100%);
+}
+
+/* Box 3 */
+.box3 {
+  background-image: linear-gradient(135deg, #FFD3A5 10%, #FD6585 100%);
+}
+
+/* Box 4 */
+.box4 {
+  background-image: linear-gradient(135deg, #EE9AE5 10%, #5961F9 100%);
+}
+
+/* Box 5 */
+.box5 {
+  background-image: linear-gradient(135deg, #A2D8FF 10%, #1E73D3 100%);
+}
+
+/* Box 6 */
+.box6 {
+  background-image: linear-gradient(135deg, #7AF7D6 10%, #4C91FF 100%);
+}
+
+/* Box 7 */
+.box7 {
+  background-image: linear-gradient(135deg, #FFB79D 10%, #F79C42 100%);
+}
+
+/* Box 8 */
+.box8 {
+  background-image: linear-gradient(135deg, #F6A1E3 10%, #4F72F5 100%);
+}
+
+/* Box 9 */
+.box9 {
+  background-image: linear-gradient(135deg, #C9E5FF 10%, #5089F3 100%);
+}
+
+/* Box 10 */
+.box10 {
+  background-image: linear-gradient(135deg, #FFB1D4 10%, #FF67A2 100%);
+}
+
+/* Box 11 */
+.box11 {
+  background-image: linear-gradient(135deg, #B2D9FF 10%, #2A75F6 100%);
+}
+
+/* Box 12 */
+.box12 {
+  background-image: linear-gradient(135deg, #81F1FF 10%, #0060D0 100%);
+}
+
+/* Box 13 */
+.box13 {
+  background-image: linear-gradient(135deg, #FFB8C1 10%, #FF8FA2 100%);
+}
+
+/* Box 14 */
+.box14 {
+  background-image: linear-gradient(135deg, #F5A1FF 10%, #7D60F9 100%);
+}
+
+/* Box 15 */
+.box15 {
+  background-image: linear-gradient(135deg, #A2D8FF 10%, #3376F4 100%);
+}
+
+
+
