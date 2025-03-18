@@ -78,13 +78,16 @@ error_reporting(E_ALL);
       <div class="containerTimes">
       </div>
 
+      <div class="containerDashboard">
+        <canvas id="myChart"></canvas>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js deve vir primeiro -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>  <!-- ApexCharts (se necessário) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> <!-- jQuery -->
+<script src="assets/scripts.js"></script> <!-- Seu script personalizado -->
 
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="assets/scripts.js"></script>
 
-
-
+ 
 
   </body>
 </html>

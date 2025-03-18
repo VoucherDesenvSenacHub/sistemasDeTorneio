@@ -91,3 +91,51 @@ $(document).ready(function() {
   }, 1000);
 });
 
+
+
+
+
+let myChart;  // Variável global para armazenar a instância do gráfico
+
+function carregarDashboard() {
+  const ctx = document.getElementById('myChart');
+
+  // Se o gráfico já foi criado, apenas atualize os dados
+  if (myChart) {
+    const novosDados = [12, 19, 3, 5, 2, 3];  // Substitua com seus dados reais
+    myChart.data.datasets[0].data = novosDados;  // Atualiza os dados
+    myChart.update();  // Atualiza o gráfico
+  } else {
+    // Caso o gráfico não tenha sido criado ainda, crie-o
+    myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],  // Dados iniciais ou dados reais
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+}
+
+$(document).ready(function() {
+  carregarDashboard();  // Carregar o gráfico assim que a página carregar
+  console.log("Dashboard carregado na inicialização");
+
+  // Atualiza o gráfico a cada 1 segundo (1000ms)
+  setInterval(function() {
+    console.log("Atualizando Dashboard...");
+    carregarDashboard();  // Atualiza o gráfico sem recriar
+  }, 1000);
+});
+
