@@ -13,7 +13,7 @@ CREATE TABLE times (
 
 CREATE TABLE desafio (
     id_desafio INT NOT NULL AUTO_INCREMENT,
-    nome VARCHAR(200),
+    pontos int,
     enunciado VARCHAR(200),
     opcaoA CHAR(250),
     opcaoB CHAR(250),
@@ -59,6 +59,7 @@ INSERT INTO times (nome) VALUES ('Time 7');
 INSERT INTO times (nome) VALUES ('Time 8');
 INSERT INTO times (nome) VALUES ('Time 9');
 INSERT INTO times (nome) VALUES ('Time 9');
+INSERT INTO times (nome) VALUES ('Time 10');
 
 
 -- Criar Desafios
@@ -66,14 +67,21 @@ INSERT INTO desafio (nome, descricao) VALUES ('Desafio 1', 'Descrição do desaf
 INSERT INTO desafio (nome, descricao) VALUES ('Desafio 2', 'Descrição do desafio 2');
 
 -- Inserir pontuaçao
-INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (1, 1, 10);  -- Time A fez 10 pontos no Desafio 1
-INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (2, 1, 8);   -- Time B fez 8 pontos no Desafio 1
-INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (1, 2, 7);   -- Time A fez 7 pontos no Desafio 2
-INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (2, 2, 9);   -- Time B fez 9 pontos no Desafio 2
-INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (3, 1, 10);
-INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (3, 2, 5);
-INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (4, 1, 10);
-INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (4, 2, 6);
+INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (1, 1, 250);  
+INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (1, 2, 100);
+
+  
+INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (2, 1, 150); 
+INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (2, 2, 100);  
+ 
+INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (3, 1, 320);
+INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (3, 2, 100);
+
+INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (4, 1, 100);
+INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (4, 2, 100);
+
+INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (5, 1, 120);
+INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (5, 2, 130);
 -- consultar os desafios
 SELECT * FROM desafio;
 
