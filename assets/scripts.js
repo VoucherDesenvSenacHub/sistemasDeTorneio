@@ -28,12 +28,12 @@ function carregarPontos() {
                           <div class="boxStyle box${index + 1}">
                               <div class="detalhes">
                                   <div class = "containerPontos ">
-                                    <h4>Pontos: </h4>
-                                    <h4 id="time${index + 1}-pontos"> ${pontos}</h4> <!-- Exibe os pontos aqui -->
+                                    <h5>Pontos: </h5>
+                                    <h5 id="time${index + 1}-pontos"> ${pontos}</h5> <!-- Exibe os pontos aqui -->
                                   </div>
                                   <div class = "containerNameTime">
-                                    <h4>Time:</h4>
-                                    <h4>${time}</h4>
+                                    <h5>Time:</h5>
+                                    <h5>${time}</h5>
                                   </div>
                               </div>
                               <div id="caixa${index + 1}"></div>
@@ -95,37 +95,97 @@ $(document).ready(function() {
 
 
 
+
+
+
+
+
+
 let myChart;  // Variável global para armazenar a instância do gráfico
 
 function carregarDashboard() {
-  const ctx = document.getElementById('myChart');
+  $.ajax({
+    url: 'getPonto.php',  // URL para carregar os dados
+    method: 'GET',
+    dataType: 'json',
+    success: function(data) {
+      console.log('Dados recebidos:', data);  // Exibe os dados recebidos no console
 
-  // Se o gráfico já foi criado, apenas atualize os dados
-  if (myChart) {
-    const novosDados = [12, 19, 3, 5, 2, 3];  // Substitua com seus dados reais
-    myChart.data.datasets[0].data = novosDados;  // Atualiza os dados
-    myChart.update();  // Atualiza o gráfico
-  } else {
-    // Caso o gráfico não tenha sido criado ainda, crie-o
-    myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],  // Dados iniciais ou dados reais
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
+      // Verifica se a resposta é um array válido
+      if (Array.isArray(data)) {
+        console.log("A resposta é um array válido.");
+
+        // Coleta os nomes dos times e os pontos
+        const times = data.map(item => item.time);
+        const pontos = data.map(item => parseInt(item.pontos, 10));  // Converte os pontos para números inteiros
+
+        const ctx = document.getElementById('myChart');
+
+        // Se o gráfico já foi criado, apenas atualize os dados
+        if (myChart) {
+          myChart.data.labels = times;  // Atualiza os nomes dos times
+          myChart.data.datasets[0].data = pontos;  // Atualiza os pontos dos times
+          myChart.update();  // Atualiza o gráfico
+        } else {
+          // Caso o gráfico não tenha sido criado ainda, crie-o
+          myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: times,
+              datasets: [{
+                label: '# de Pontos',
+                data: pontos,
+                borderColor: '#FFFFFF',
+                backgroundColor: '#00BFFF',
+                borderWidth: 2
+              }]
+            },
+            options: {
+              responsive: true,  // Garante que o gráfico será redimensionado automaticamente
+              maintainAspectRatio: false,  // Permite que o gráfico preencha o contêiner (sem manter a proporção)
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  ticks: {
+                    font: {
+                      size: 20,  // Tamanho da fonte para os pontos no eixo Y
+                      color: '#FFFFFF'  // Cor da fonte para os rótulos no eixo Y
+                    }
+                  }
+                },
+                x: {
+                  ticks: {
+                    font: {
+                      size: 20,  // Tamanho da fonte para os nomes dos times no eixo X
+                      color: '#FFFFFF'  // Cor da fonte para os rótulos no eixo X
+                    }
+                  }
+                }
+              },
+              plugins: {
+                legend: {
+                  labels: {
+                    font: {
+                      size: 18,  // Tamanho da fonte da legenda
+                      color: '#FFFFFF'  // Cor da fonte para a legenda
+                    }
+                  }
+                }
+              }
+            }
+          });
         }
+      } else {
+        console.log('Erro: A resposta não é um array válido.');
       }
-    });
-  }
+    },
+    
+    error: function(xhr, status, error) {
+      console.log('Erro ao carregar os pontos', error);
+      console.log('Status:', status);
+      console.log('Response Text:', xhr.responseText);
+    }
+  });
 }
 
 $(document).ready(function() {
@@ -135,7 +195,6 @@ $(document).ready(function() {
   // Atualiza o gráfico a cada 1 segundo (1000ms)
   setInterval(function() {
     console.log("Atualizando Dashboard...");
-    carregarDashboard();  // Atualiza o gráfico sem recriar
+    carregarDashboard();  // Atualiza o gráfico com os dados mais recentes
   }, 1000);
 });
-

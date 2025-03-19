@@ -1,8 +1,9 @@
 
 body {
   width: 100%;
-  background: #343E59;
-  color: #777;
+  height: 100vh;
+  background: #1B213B;
+  color: #fff;
   font-family: Montserrat, Arial, sans-serif;
 }
 nav{
@@ -30,8 +31,9 @@ body{
 }
 
 .box {
-  background-color: #2B2D3E;
-  padding: 25px 20px;
+
+  padding: 25px 25px; 
+  border-radius: 4px; 
 }
 
 .shadow {
@@ -70,15 +72,23 @@ body{
 }
 
 .containerTimes{
-  width: 85%;
-  height: auto;
+  width: 95%;
+
+  height: 250px;
+  overflow-x: auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ajuste automático de colunas */
   grid-gap: 20px; 
   padding: 10px;
-  border: 1px solid red; 
+  /* border: 1px solid red;  */
+  background-color: #262D47;
+
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 10px;
 }
 .container1{
+  height: 80px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -89,13 +99,14 @@ body{
 .detalhes{
   width: 100%;
   height: 100%;
-  text-shadow: 0 1px 1px 1px #666;
+  text-shadow: 0 1px 1px 1px #28a2c0;
   box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
 
   border-radius: 5px;
 }
 .boxStyle{
   width: 90%;
+  height: 100%;
   border-radius: 5px;
   padding-left: 10px;
 
@@ -105,7 +116,7 @@ body{
 
 /* Box 1 */
 .box1 {
-  background-image: linear-gradient(135deg, #ABDCFF 10%, #0396FF 100%);
+  background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);
 }
 
 /* Box 2 */
@@ -180,11 +191,24 @@ body{
 
 
 
-.containerDashboard{
-  width: 85%;
-  height: auto;
+.containerDashboard {
+  width: 95%;
+  height: 500px; /* Defina a altura do contêiner */
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #262D47;
 }
+
 #myChart {
-  width: 100%;
-  height: 400px; /* Ajuste o tamanho conforme necessário */
-}
+  width: 100%; 
+  height: 100%; 
+  display: block; 
+
+} 
+
+
+
+
+
+

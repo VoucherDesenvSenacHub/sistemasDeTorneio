@@ -7,6 +7,8 @@ require '../../app/controller/desafios.php';
   $dados = $objUser->buscar();
 
   // print_r($dados);
+
+  require './menuPerguntas.php'
 ?>
 
 <!DOCTYPE html>
@@ -22,53 +24,6 @@ require '../../app/controller/desafios.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-dark">
-  <div class="container-fluid">
-    <!-- Button de hamburguer -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span> <!-- Icone de hamburguer -->
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active text-white" aria-current="page" href="../../index.php">Dashboard</a>
-        </li>
-
-        <li class="nav-item dropdown">
-          <!-- Dropdown link para Desafios -->
-          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownDesafios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Desafios
-          </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownDesafios">
-              <li class="nav-item">
-                <a class="nav-link" href="./cadastrar_desafio.php">Cadastrar Desafio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="">Listar Desafio</a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="nav-item dropdown">
-          <!-- Dropdown link para Times -->
-          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownTimes" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Times
-          </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownTimes">
-              <li class="nav-item">
-                <a class="nav-link" href="../times/cadastrar_time.php">Cadastrar Times</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../times/listar_time.php">Listar Times</a>
-              </li>
-            </ul>
-          </li>
-
-        </ul>
-    </div>
-  </div>
-</nav>
 
     <div class="container">
         <h1 class="mt-4 text-center">Lista de Desafios </h1>
@@ -79,7 +34,6 @@ require '../../app/controller/desafios.php';
           <thead>
             <tr>
               <th scope="col">ID</th>
-              <th scope="col">Nome</th>
               <th scope="col">enunciado</th>
               <th scope="col">A)</th>
               <th scope="col">B)</th>
@@ -87,6 +41,7 @@ require '../../app/controller/desafios.php';
               <th scope="col">D)</th>
               <th scope="col">E)</th>
               <th scope="col">Resposta</th>
+              <th scope="col">pontos</th>
             </tr>
           </thead>
 
@@ -96,7 +51,6 @@ require '../../app/controller/desafios.php';
                 echo '
                 <tr>
                   <th scope="row">'.$desafio->id_desafio.'</th>
-                  <td>'.$desafio->nome.'</td>
                   <td>'.$desafio->enunciado.'</td>
                   <td>'.$desafio->opcaoA.'</td>
                   <td>'.$desafio->opcaoB.'</td>
@@ -104,6 +58,7 @@ require '../../app/controller/desafios.php';
                   <td>'.$desafio->opcaoD.'</td>
                   <td>'.$desafio->opcaoE.'</td>
                   <td>'.$desafio->resposta.'</td>
+                  <td>'.$desafio->pontos.'</td>
                   <td><a class="btn btn-primary" href="./editar_desafio.php?id_desc='.$desafio->id_desafio.'"><i class="bi bi-pencil-square"></i></a></td>
                   <td><a class="btn btn-danger" href="./excluir_desafio.php?id_desc='.$desafio->id_desafio.'"><i class="bi bi-trash3"></i></a></td>
 

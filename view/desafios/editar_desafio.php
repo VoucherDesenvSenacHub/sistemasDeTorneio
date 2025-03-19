@@ -18,12 +18,24 @@ if(isset($_GET['id_desc'])){
   // ---atualiza
   if(isset($_POST['editar'])){
 
-    $nome = $_POST['nome'];
-    $descricao = $_POST['descricao'];
+    $pontos = $_POST['pontos'];
+    $enunciado = $_POST['enunciado'];
+    $opcaoA = $_POST['opcaoA'];
+    $opcaoB = $_POST['opcaoB'];
+    $opcaoC = $_POST['opcaoC'];
+    $opcaoD = $_POST['opcaoD'];
+    $opcaoE = $_POST['opcaoE'];
+    $resposta = $_POST['resposta'];
 
 
-    $desc_edit->nome = $nome;
-    $desc_edit->descricao = $descricao;
+    $desc_edit->pontos = $pontos;
+    $desc_edit->enunciado = $enunciado;
+    $desc_edit->opcaoA = $opcaoA;
+    $desc_edit->opcaoB = $opcaoB;
+    $desc_edit->opcaoC = $opcaoC;
+    $desc_edit->opcaoD = $opcaoD;
+    $desc_edit->opcaoE = $opcaoE;
+    $desc_edit->resposta = $resposta;
 
     $res = $desc_edit->atualizar();
 
@@ -36,7 +48,7 @@ if(isset($_GET['id_desc'])){
   }
 }
 
-
+require './menuPerguntas.php'
 ?>
 
 <!DOCTYPE html>
@@ -50,49 +62,46 @@ if(isset($_GET['id_desc'])){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-dark">
-        <div class="container-fluid">
-          
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active text-white" aria-current="page" href="../../index.php">Dashboard</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="./cadastrar_desafio.php">Cadastrar Desafio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="./listar_desafio.php">Lista Desafios</a>
-              </li>
-
-            </ul>
-          </div>
-        </div>
-      </nav>
 
     <div class="container">
-        <h1 class="mt-4 text-center">Editar Produto</h1>
+        <h1 class="mt-4 text-center">Editar Perguntas</h1>
     </div>
     
     <div class="container">
         <form method="POST" enctype="multipart/form-data">
 
-            <div class="mb-3">
-              <label for="nome" class="form-label">Nome Produto</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nome" value="<?php echo $desc_edit->nome;?>">
+        <div class="mb-3">
+            <label for="enunciado" class="form-label">Enunciado da pergunta</label>
+            <input type="text" class="form-control" id="enunciado" name="enunciado" value="<?php echo $desc_edit->enunciado;?>">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Respostas</label>
+            <div class="row">
+                <div class="col-2"><label>a)</label><input type="text" class="form-control" name="opcaoA" value="<?php echo $desc_edit->opcaoA;?>"></div>
+                <div class="col-2"><label>b)</label><input type="text" class="form-control" name="opcaoB" value="<?php echo $desc_edit->opcaoB;?>"></div>
+                <div class="col-2"><label>c)</label><input type="text" class="form-control" name="opcaoC" value="<?php echo $desc_edit->opcaoC;?>"></div>
+                <div class="col-2"><label>d)</label><input type="text" class="form-control" name="opcaoD" value="<?php echo $desc_edit->opcaoD;?>"></div>
+                <div class="col-2"><label>e)</label><input type="text" class="form-control" name="opcaoE" value="<?php echo $desc_edit->opcaoE;?>"></div>
             </div>
+        </div>
 
+        <div class="mb-3">
+            <label for="resposta" class="form-label">Escolha a Resposta Correta</label>
+            <select class="form-control" name="resposta" id="resposta">
+                <option value="" disabled selected>Selecione uma opção...</option>
+                <option value="a">a</option>
+                <option value="b">b</option>
+                <option value="c">c</option>
+                <option value="d">d</option>
+                <option value="e">e</option>
+            </select>
+        </div>
 
-            <div class="mb-3">
-                <label for="descricao" class="form-label">descricao</label>
-                <input type="text" class="form-control" id="descricao" name="descricao"  value="<?php echo $desc_edit->descricao;?>">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-            </div>
-
-
+        <div class="mb-3">
+            <label for="nome" class="form-label">Quantidade de pontos recebidos</label>
+            <input type="number" class="form-control" id="pontos" name="pontos">
+        </div>
 
             <button type="reset" class="btn btn-danger">Cancelar</button>
             <button type="submit" name="editar" class="btn btn-primary">Salvar</button>

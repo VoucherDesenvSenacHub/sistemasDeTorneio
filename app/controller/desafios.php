@@ -3,7 +3,7 @@ require '../../app/model/Database.php';
 
 class Desafio{
     public int $id_desafio;
-    public string $nome;
+    public int $pontos;
     public string $enunciado;
     public string $opcaoA;
     public string $opcaoB;
@@ -18,7 +18,7 @@ class Desafio{
 
         $res = $db->insert(
                 [
-                    'nome'=> $this->nome,
+                    'pontos'=> $this->pontos,
                     'enunciado'=> $this->enunciado,
                     'opcaoA'=> $this->opcaoA,
                     'opcaoB'=> $this->opcaoB,
@@ -50,8 +50,8 @@ class Desafio{
 
         $res = $db->update("id_desafio =".$this->id_desafio,
                             [
-                                "nome" => $this->nome,
-                                "descricao" => $this->descricao,
+                                "pontos" => $this->pontos,
+                                "enunciado" => $this->enunciado,
                             ]
                         );
 
