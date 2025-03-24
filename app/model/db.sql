@@ -5,23 +5,39 @@ DROP DATABASE torneioArduino;
 DROP TABLE times;
 DROP TABLE desafio;
 
+CREATE TABLE professor (
+    id_professor INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(250),
+    senha VARCHAR(100), 
+    PRIMARY KEY(id_professor)
+);
+
+SELECT * FROM professor;
+SELECT * FROM desafio;
+SELECT * FROM times;
+INSERT INTO professor(nome, senha) VALUE('Guilherme', 'admin');
+
 CREATE TABLE times (
     id_times INT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(200),
-    PRIMARY KEY(id_times)
+    id_professor INT,
+    PRIMARY KEY(id_times),
+    FOREIGN KEY(id_professor) REFERENCES professor(id_professor)
 );
 
 CREATE TABLE desafio (
     id_desafio INT NOT NULL AUTO_INCREMENT,
-    pontos int,
+    pontos INT,
     enunciado VARCHAR(200),
     opcaoA CHAR(250),
     opcaoB CHAR(250),
     opcaoC CHAR(250),
     opcaoD CHAR(250),
     opcaoE CHAR(250),
-    resposta char(1),
-    PRIMARY KEY(id_desafio)
+    resposta CHAR(1), 
+    id_professor INT,
+    PRIMARY KEY(id_desafio),
+    FOREIGN KEY(id_professor) REFERENCES professor(id_professor)
 );
 
 CREATE TABLE pontuacao (
@@ -34,17 +50,20 @@ CREATE TABLE pontuacao (
     FOREIGN KEY(id_desafio) REFERENCES desafio(id_desafio)
 );
 
+
 DELIMITER //
 
 CREATE TRIGGER after_insert_time
 AFTER INSERT ON times
 FOR EACH ROW
 BEGIN
-    INSERT INTO pontuacao (id_times, pontos) VALUES (NEW.id_times, 0);
+    INSERT INTO pontuacao (id_times, id_desafio, pontos) 
+    VALUES (NEW.id_times, NULL, 0); 
 END;
 
 //
 DELIMITER ;
+
 
 Select * FROM desafio;
 
@@ -67,17 +86,17 @@ INSERT INTO desafio (nome, descricao) VALUES ('Desafio 1', 'Descrição do desaf
 INSERT INTO desafio (nome, descricao) VALUES ('Desafio 2', 'Descrição do desafio 2');
 
 -- Inserir pontuaçao
-INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (1, 1, 250);  
+INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (1, 1, 250);
 INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (1, 2, 100);
 
   
-INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (2, 1, 150); 
+INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (6, 1, 150); 
 INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (2, 2, 100);  
  
-INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (3, 1, 320);
+INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (7, 1, 320);
 INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (3, 2, 100);
 
-INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (4, 1, 100);
+INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (8, 1, 100);
 INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (4, 2, 100);
 
 INSERT INTO pontuacao (id_times, id_desafio, pontos) VALUES (5, 1, 120);
