@@ -1,11 +1,15 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+session_start();
+
+// Verificar se o professor está logado
+if (!isset($_SESSION['id_professor'])) {
+    header('Location: ./index.php'); // Redireciona para a página de login
+    exit(); // Interrompe a execução do script
+}
 
 require '../../app/controller/desafios.php';
 
-if(isset($_POST['cadastrar'])){
-
+if (isset($_POST['cadastrar'])) {
     $pontos = $_POST['pontos'];
     $enunciado = $_POST['enunciado'];
     $opcaoA = $_POST['opcaoA'];
@@ -17,6 +21,7 @@ if(isset($_POST['cadastrar'])){
 
     $objUser = new Desafio();
 
+    // Definindo as propriedades do objeto Desafio
     $objUser->pontos = $pontos;
     $objUser->enunciado = $enunciado;
     $objUser->opcaoA = $opcaoA;
@@ -26,16 +31,17 @@ if(isset($_POST['cadastrar'])){
     $objUser->opcaoE = $opcaoE;
     $objUser->resposta = $resposta;
 
+    // Cadastrando o desafio
     $res = $objUser->cadastrar();
 
-    if($res){
-        echo "<script>alert('Cadastrado com Sucesso') </script>";
-    }else{
-        echo "<script>alert('Erro ao Cadastrar') </script>";
+    if ($res) {
+        echo "<script>alert('Cadastrado com Sucesso'); window.location.href = 'listar_desafio.php'; </script>";
+    } else {
+        echo "<script>alert('Erro ao Cadastrar'); </script>";
     }
 }
 
-require './menuPerguntas.php'
+require './menuPerguntas.php';
 ?>
 
 <!DOCTYPE html>

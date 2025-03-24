@@ -1,93 +1,98 @@
 <?php
-
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+require './app/controller/professor.php';
+
+$loginError = false; // Variável para controlar o erro no login
+
+// Inicia a sessão para manipulação de variáveis de sessão
+session_start();
+
+if (isset($_POST['Login'])) {
+    $nome = $_POST['Username'];
+    $senha = $_POST['Password'];
+
+    $objUser = new Professor();
+    $objUser->nome = $nome;
+    $objUser->senha = $senha;
+
+    $res = $objUser->logar();
+
+    if ($res) {
+        // Login bem-sucedido, armazenar o id_professor na sessão
+        $_SESSION['id_professor'] = $objUser->id_professor;
+        
+        // Redireciona para o dashboard ou outra página
+        header('Location: ./view/dashboard.php');
+        exit();
+    } else {
+        // Se login falhar, ativa o erro para exibição
+        $loginError = true;
+    }
+}
+
 
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- Link para o Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-    <!-- Link para o Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
-
-    <!-- Link para o CSS personalizado -->
-    <link rel="stylesheet" href="assets/styles.css" />
-
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <title>Login</title>
+    <link rel="stylesheet" href="assets/index.css">
 </head>
 <body>
+    <div class="loginBox">
+        <img class="user" src="https://i.ibb.co/yVGxFPR/2.png" height="100px" width="100px">
+        <h3>Sign in here</h3>
+        <form action="index.php" method="post">
+            <div class="inputBox"> 
+                <input id="uname" type="text" name="Username" placeholder="Username" required>
+                <input id="pass" type="password" name="Password" placeholder="Password" required> 
+            </div> 
+            <input type="submit" name="Login" value="Login">
+        </form>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-dark">
-  <div class="container-fluid">
-    <!-- Button de hamburguer -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span> <!-- Icone de hamburguer -->
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active text-white" aria-current="page" href="">Dashboard</a>
-        </li>
-
-        <li class="nav-item dropdown">
-          <!-- Dropdown link para Desafios -->
-          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownDesafios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Desafios
-          </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownDesafios">
-              <li class="nav-item">
-                <a class="nav-link" href="./view/desafios/cadastrar_desafio.php">Cadastrar Desafio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./view/desafios/listar_desafio.php">Listar Desafio</a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="nav-item dropdown">
-          <!-- Dropdown link para Times -->
-          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownTimes" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Times
-          </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownTimes">
-              <li class="nav-item">
-                <a class="nav-link" href="./view/times/cadastrar_time.php">Cadastrar Times</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./view/times/listar_time.php">Listar Times</a>
-              </li>
-            </ul>
-          </li>
-
-        </ul>
+        <a href="#">Forget Password<br> </a>
+        <div class="text-center">
+            <p style="color: #59238F;">Sign-Up</p>
+        </div>
     </div>
-  </div>
-</nav>
 
+    <?php if ($loginError): ?>
+        <!-- Chama o SweetAlert2 quando o login falha -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+        Swal.fire({
+            title: 'Erro de login',
+            text: 'Sua senha ou usuário está incorreto!',
+            icon: 'error',
+            confirmButtonColor: '#3085d6',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location = 'index.php'; // Redireciona para a mesma página após o alerta
+            }
+        });
+        </script>
+    <?php endif; ?>
 
-      <div class="containerTimes">
-      </div>
-
-      <div class="containerDashboard">
-        <canvas id="myChart"></canvas>
-      </div>
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js deve vir primeiro -->
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>  <!-- ApexCharts (se necessário) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> <!-- jQuery -->
-<script src="assets/scripts.js"></script> <!-- Seu script personalizado -->
-
-
- 
-
-  </body>
+    <svg width="100%" height="100%" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" overflow="auto" shape-rendering="auto" fill="#ffffff">
+  <defs>
+   <path id="wavepath" d="M 0 2000 0 500 Q 105 421 210 500 t 210 0 210 0 210 0 210 0 210 0 210 0  v1000 z" />
+   <path id="motionpath" d="M -420 0 0 0" /> 
+  </defs>
+  <g >
+   <use xlink:href="#wavepath" y="183" fill="#115473">
+   <animateMotion
+    dur="5s"
+    repeatCount="indefinite">
+    <mpath xlink:href="#motionpath" />
+   </animateMotion>
+   </use>
+  </g>
+</svg>
+		
+</body>
 </html>

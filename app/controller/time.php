@@ -1,87 +1,97 @@
 <?php
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
 require __DIR__ . '/../model/Database.php';
 
 class Times_torneio {
     public int $id_times;
     public string $nome;
+    public int $id_professor;  // Aqui adicionamos o id_professor
 
-
+    // Método para cadastrar um time
     public function cadastrar(){
         $db = new Database('times');
-
-        $res = $db->insert(
-                [
-                    'nome'=> $this->nome,
-                ]
-            );
+        
+        // Verifica se a tabela times tem as colunas corretas
+        $res = $db->insert([
+            'nome' => $this->nome,
+            'id_professor' => $this->id_professor,  // Guardar o id_professor ao cadastrar
+        ]);
+        
+        // Se a inserção for bem-sucedida, retorna o ID do time inserido
         return $res;
     }
 
-    public function buscar($where=null, $order=null, $limit=null){
+    // Método para buscar os times do professor logado
+    public function buscar($where = null, $order = null, $limit = null) {
+        session_start();
+        $id_professor = $_SESSION['id_professor'];  // Pega o ID do professor da sessão
+        
+        // Alterar o where para filtrar pelos desafios do professor logado
+        $where = "id_professor = $id_professor";  // Garantir que estamos buscando apenas os desafios do professor logado
+        
         $db = new Database('times');
-
-        $res = $db->select($where, $order, $limit)->fetchAll(PDO::FETCH_CLASS,self::class);
+        $res = $db->select($where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class);
         return $res;
     }
 
+
+    // Método para buscar um time pelo id
     public function buscar_por_id($id){
         $db = new Database('times');
-
-        $obj = $db->select('id_times ='.$id)->fetchObject(self::class);
-        return $obj; //retorna um obj da classe usuario
+        $obj = $db->select('id_times =' . (int)$id)->fetchObject(self::class);
+        return $obj;
     }
 
+    // Método para atualizar um time
     public function atualizar(){
         $db = new Database('times');
-
         $res = $db->update("id_times =".$this->id_times,
-                            [
-                                "nome" => $this->nome,
-                            ]
-                        );
-
+            [
+                "nome" => $this->nome,
+            ]
+        );
         return $res;
     }
 
-
-
+    // Método para excluir um time
     public function excluirTime($id_times) {
-        // Instancia a classe Database
         $db = new Database();
-    
-        // Chama o método deleteTime passando o ID do time
         $res = $db->deleteTime($id_times);
-    
-        // Retorna o resultado da operação
         return $res;
     }
 
-    public function getPontos() {
-        try {
-            $db = new Database();
-            $query = "
-                SELECT t.nome AS time, SUM(p.pontos) AS pontos
-                FROM times t
-                LEFT JOIN pontuacao p ON t.id_times = p.id_times
-                GROUP BY t.id_times
-            ";
     
-            $stmt = $db->execute($query);
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-            // Certifique-se de que estamos enviando apenas JSON
-            if (empty($result)) {
-                echo json_encode(['error' => 'Nenhum time encontrado.']);
-            } else {
-                echo json_encode($result);
-            }
-        } catch (Exception $e) {
-            echo json_encode(['error' => 'Erro ao obter pontos: ' . $e->getMessage()]);
+// Times_torneio.php (Controller)
+
+public function getPontos() {
+    try {
+        $db = new Database();
+        
+        // Alteração da consulta SQL para filtrar pelos times do professor logado
+        $query = "
+            SELECT t.nome AS time, SUM(p.pontos) AS pontos
+            FROM times t
+            LEFT JOIN pontuacao p ON t.id_times = p.id_times
+            WHERE t.id_professor = :professor_id  -- Filtra pelos times do professor logado
+            GROUP BY t.id_times
+        ";
+        
+        // Prepara e executa a consulta
+        $stmt = $db->execute($query, [':professor_id' => $_SESSION['id_professor']]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC); // Usando FETCH_ASSOC para retornar um array associativo
+        
+        // Se não houver dados, retornamos um array vazio
+        if (empty($result)) {
+            return ['error' => 'Nenhum time encontrado para este professor.'];
+        } else {
+            return $result;  // Retorna o resultado como array
         }
+    } catch (Exception $e) {
+        return ['error' => 'Erro ao obter pontos: ' . $e->getMessage()];
     }
 }
 
+    
+    
+}
+?>

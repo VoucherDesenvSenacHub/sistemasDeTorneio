@@ -7,9 +7,9 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          
-          <li class="nav-item">
-          <a class="nav-link active text-white" aria-current="page" href="../../index.php">Dashboard</a>
+        
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" href="../dashboard.php">Dashboard</a>
         </li>
         
         <li class="nav-item dropdown">
@@ -45,7 +45,12 @@
         <li class="nav-item">
           <a class="nav-link active text-white" aria-current="page" href="../questionario/questionario.php">Questionario</a>
         </li>
-    </ul>
+      </ul>
+
+      <!-- Botão de Logout com ícone -->
+      <a href="../logout.php" class="btn btn-outline-light ms-3">
+        <i class="bi bi-box-arrow-right"></i> Sair
+      </a>
     </div>
   </div>
 </nav>

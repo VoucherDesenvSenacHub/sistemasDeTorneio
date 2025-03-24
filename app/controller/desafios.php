@@ -11,30 +11,41 @@ class Desafio{
     public string $opcaoD;
     public string $opcaoE;
     public string $resposta;
+    public int $id_professor;
 
-
-    public function cadastrar(){
+    public function cadastrar() {
         $db = new Database('desafio');
+        
+        // Obter o ID do professor da sessão
+        session_start();
+        $id_professor = $_SESSION['id_professor'];
 
+        // Associamos o id_professor ao desafio
         $res = $db->insert(
-                [
-                    'pontos'=> $this->pontos,
-                    'enunciado'=> $this->enunciado,
-                    'opcaoA'=> $this->opcaoA,
-                    'opcaoB'=> $this->opcaoB,
-                    'opcaoC'=> $this->opcaoC,
-                    'opcaoD'=> $this->opcaoD,
-                    'opcaoE'=> $this->opcaoE,
-                    'resposta'=> $this->resposta,
-                ]
-            );
+            [
+                'pontos' => $this->pontos,
+                'enunciado' => $this->enunciado,
+                'opcaoA' => $this->opcaoA,
+                'opcaoB' => $this->opcaoB,
+                'opcaoC' => $this->opcaoC,
+                'opcaoD' => $this->opcaoD,
+                'opcaoE' => $this->opcaoE,
+                'resposta' => $this->resposta,
+                'id_professor' => $id_professor  // Associando o id_professor
+            ]
+        );
         return $res;
     }
 
-    public function buscar($where=null, $order=null, $limit=null){
+    public function buscar($where = null, $order = null, $limit = null) {
+        session_start();
+        $id_professor = $_SESSION['id_professor'];  // Pega o ID do professor da sessão
+        
+        // Alterar o where para filtrar pelos desafios do professor logado
+        $where = "id_professor = $id_professor";  // Garantir que estamos buscando apenas os desafios do professor logado
+        
         $db = new Database('desafio');
-
-        $res = $db->select($where, $order, $limit)->fetchAll(PDO::FETCH_CLASS,self::class);
+        $res = $db->select($where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class);
         return $res;
     }
 
@@ -52,6 +63,12 @@ class Desafio{
                             [
                                 "pontos" => $this->pontos,
                                 "enunciado" => $this->enunciado,
+                                'opcaoA' => $this->opcaoA,
+                                'opcaoB' => $this->opcaoB,
+                                'opcaoC' => $this->opcaoC,
+                                'opcaoD' => $this->opcaoD,
+                                'opcaoE' => $this->opcaoE,
+                                'resposta' => $this->resposta,
                             ]
                         );
 

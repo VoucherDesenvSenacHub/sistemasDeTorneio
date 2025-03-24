@@ -3,10 +3,17 @@
 
 
 class Database {
+    // private $conn;
+    // private string $local = 'localhost';
+    // private string $db = 'torneioArduino';
+    // private string $user = 'devweb';
+    // private string $password = 'suporte@22';
+    // private $table;
+
     private $conn;
     private string $local = 'localhost';
     private string $db = 'torneioArduino';
-    private string $user = 'devweb';
+    private string $user = 'root';
     private string $password = 'suporte@22';
     private $table;
 
