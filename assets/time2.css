@@ -2,24 +2,59 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-decoration: none;
 }
 
 body {
     width: 100%;
     min-height: 100vh;
-    background: linear-gradient(90deg, rgba(149,5,167,0.84) 0%, rgba(62,2,102,1) 25%, rgba(0,0,0,1) 50%, rgba(167,19,245,1) 81%, rgba(98,3,221,1) 100%);
+    background-image: url(img/background.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* background: linear-gradient(90deg, rgba(149,5,167,0.84) 0%, rgba(62,2,102,1) 25%, rgba(0,0,0,1) 50%, rgba(167,19,245,1) 81%, rgba(98,3,221,1) 100%); */
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    /* filter: brightness(0.5); */
+
 }
+
+::-webkit-scrollbar{
+  width: 10px;
+}
+::-webkit-scrollbar-thumb{
+  width: 10px;
+  background-color: #9849ff;
+  border-radius: 50px; 
+}
+
+
+.card-link{
+  text-decoration: none;
+}
+
+/* .containerOpacity{
+  width: 100%;
+  min-height: 100vh;
+  border: 2px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #18181b;
+  opacity: 0.5;
+
+} */
+
 
 .containerAllTimes {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 30px;
+    z-index: 3;
 }
 
 .card-container {
@@ -32,6 +67,7 @@ body {
     width: 100px;
     height: auto;
     border-radius: 10px;
+    filter: drop-shadow(18px 15px 16px #000000);
 }
 
 .card {
@@ -150,6 +186,7 @@ body {
     line-height: 35px;
     height: 100%;
     transition: 0.5s ease-in-out;
+
   }
   
   .hidden {
@@ -177,4 +214,39 @@ body {
     font-size: 40px;
     font-weight: 600;
     color: #fff;
+}
+
+.times-list{
+  width: 100%;
+  height: auto;
+  padding: 30px;
+  gap: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+/* Faz o link ocupar todo o espaço do card */
+.card-link {
+  display: block; /* Faz o link ser um bloco */
+  text-decoration: none; /* Remove o sublinhado do link */
+  color: inherit; /* Herda a cor do texto do card */
+  text-decoration: none;
+}
+
+/* Se necessário, você pode adicionar estilos ao card quando estiver dentro de um link */
+.card-link .card {
+  cursor: pointer; /* Muda o cursor para o estilo de "mão" quando o usuário passa o mouse */
+}
+
+
+
+@media (min-width: 0px) and (max-width: 650px){
+  .times-list{
+    flex-direction: column;
+  }
+  .card-container{
+    flex-direction: column;
+  }
 }

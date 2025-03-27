@@ -77,7 +77,7 @@ $id_do_professor = $_SESSION['id_professor'];  // Agora você tem o ID do profes
         </li>
         
         <li class="nav-item">
-          <a class="nav-link active text-white" aria-current="page" href="../questionario/questionario.php">Questionario</a>
+          <a class="nav-link active text-white" aria-current="page" href="./questionario/escolher_equipe.php">Questionario</a>
         </li>
       </ul>
 

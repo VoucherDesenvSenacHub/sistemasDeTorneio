@@ -91,7 +91,19 @@ public function getPontos() {
     }
 }
 
+
     
+public function listarTimes() {
+    // Cria um objeto de Times_torneio
+    $timesController = new Database();
     
+    // Chama o método para buscar os times do professor
+    $times = $timesController->buscar();
+
+    // Retorna os times para serem usados na view
+    return $times;
+}
+
+
 }
 ?>
