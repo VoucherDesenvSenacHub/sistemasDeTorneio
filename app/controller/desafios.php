@@ -17,7 +17,7 @@ class Desafio{
         $db = new Database('desafio');
         
         // Obter o ID do professor da sessão
-        session_start();
+
         $id_professor = $_SESSION['id_professor'];
 
         // Associamos o id_professor ao desafio
@@ -38,7 +38,7 @@ class Desafio{
     }
 
     public function buscar($where = null, $order = null, $limit = null) {
-        session_start();
+
         $id_professor = $_SESSION['id_professor'];  // Pega o ID do professor da sessão
         
         // Alterar o where para filtrar pelos desafios do professor logado
