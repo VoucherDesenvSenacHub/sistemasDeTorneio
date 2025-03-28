@@ -9,9 +9,6 @@ if (!isset($_SESSION['id_professor'])) {
     exit();
 }
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
 require '../../app/controller/time.php';
 
 if (isset($_GET['id_time'])) {

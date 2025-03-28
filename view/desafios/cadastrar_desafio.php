@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 // Verificar se o professor está logado
 if (!isset($_SESSION['id_professor'])) {
     header('Location: ./index.php'); // Redireciona para a página de login

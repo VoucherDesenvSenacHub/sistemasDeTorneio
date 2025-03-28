@@ -1,9 +1,12 @@
 <?php
 
-
 // Verificar se o ID do time foi passado na URL
 if (isset($_GET['id_time'])) {
     $id_time = $_GET['id_time'];
+
+
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
     
     // Aqui você pode buscar os dados do time e exibir o questionário correspondente
     // Exemplo: buscar informações do time com o id_time, usando o seu modelo ou banco de dados
@@ -26,8 +29,7 @@ if (isset($_GET['id_time'])) {
     // Limitar a 5 perguntas
     $desafios = array_slice($desafios, 0, 5);
 
-    // Iniciar a sessão para armazenar as respostas
-    session_start();
+
     if (!isset($_SESSION['respostas'])) {
         $_SESSION['respostas'] = [];
     }
