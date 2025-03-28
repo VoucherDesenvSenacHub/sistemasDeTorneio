@@ -35,10 +35,9 @@ require './menuTimes.php';
     <div class="container">
         <h1 class="mt-4 text-center">Lista de Times</h1>
 
-        <!-- Exibir mensagem se não houver times cadastrados -->
-        <?php if ($mensagem): ?>
-            <div class="alert alert-warning"><?= $mensagem ?></div>
-        <?php endif; ?>
+        <!-- <?php if ($mensagem): ?> -->
+            <!-- <div class="alert alert-warning"><?= $mensagem ?></div> -->
+        <!-- <?php endif; ?> -->
 
         <table class="table table-striped">
             <thead>
